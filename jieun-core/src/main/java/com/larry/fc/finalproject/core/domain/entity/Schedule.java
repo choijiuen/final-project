@@ -16,11 +16,8 @@ import java.time.LocalDateTime;
 @Getter
 @Table(name = "schedules")
 @Entity
-public class Schedule {
+public class Schedule extends BaseEntity{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private LocalDateTime startAt;
     private LocalDateTime endAt;
     private String title;
@@ -31,8 +28,6 @@ public class Schedule {
 
     @Enumerated(EnumType.STRING)
     private ScheduleType scheduleType;
-    @Builder.Default
-    private LocalDateTime createdAt = LocalDateTime.now();
 
     public static Schedule event(String title, String description, LocalDateTime startAt, LocalDateTime endAt, User writer){
         return Schedule.builder()
