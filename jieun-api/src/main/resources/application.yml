@@ -1,4 +1,13 @@
 spring:
+  profiles:
+    default: dev
+  thymeleaf:
+    cache: false
+    prefix: file:jieun-api/src/main/resources/templates/
+  web:
+    resources:
+      cache:
+        period: 0
   datasource:
     url: jdbc:mysql://localhost:3306/jieun_db?useSSL=false&serverTimezone=Asia/Seoul
     driver-class-name: com.mysql.cj.jdbc.Driver

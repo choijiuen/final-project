@@ -16,7 +16,7 @@ import java.util.Optional;
 @RequiredArgsConstructor //서비스는 하위에 여러가지 빈을 주입받게 되어서 그 타입에 맞는 생성자를 롬복이 자동 생성
 public class LoginService { //로그인, 로그아웃 기능 구현
 
-    private final static String LOGIN_SESSION_KEY = "USER_ID";
+    public final static String LOGIN_SESSION_KEY = "USER_ID";
     private final UserService userService;
 
     @Transactional
