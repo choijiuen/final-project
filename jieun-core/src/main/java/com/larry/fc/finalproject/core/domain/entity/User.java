@@ -1,5 +1,6 @@
 package com.larry.fc.finalproject.core.domain.entity;
 
+import com.larry.fc.finalproject.core.util.Encryptor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -23,5 +24,10 @@ public class User extends BaseEntity{
         this.email = email;
         this.password = password;
         this.birthday = birthday;
+    }
+
+    public boolean isMatch(Encryptor encryptor, String password) {
+        return encryptor.isMatch(password, this.password); //strategy pattern
+        //인터페이스를 인자로 넘겨서 기능 위임 , 유저에 대한 기능 테스트하기 매우 편리
     }
 }
