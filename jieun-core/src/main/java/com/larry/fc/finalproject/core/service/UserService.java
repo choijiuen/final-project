@@ -41,4 +41,10 @@ public class UserService {
         return userRepository.findByEmail(email)
                 .map(user -> user.isMatch(encryptor, password) ? user : null); //비밀번호가 같으면 유저 넘기고 아니면 널 넘기기
     }
+
+    @Transactional
+    public User findByUserId(Long userId){
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("no user by id"));
+    }
 }

@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/jieun-api/final-project.jieun-api.main.iml" filepath="$PROJECT_DIR$/.idea/modules/jieun-api/final-project.jieun-api.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/jieun-batch/final-project.jieun-batch.main.iml" filepath="$PROJECT_DIR$/.idea/modules/jieun-batch/final-project.jieun-batch.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/jieun-core/final-project.jieun-core.main.iml" filepath="$PROJECT_DIR$/.idea/modules/jieun-core/final-project.jieun-core.main.iml" />
     </modules>
   </component>
