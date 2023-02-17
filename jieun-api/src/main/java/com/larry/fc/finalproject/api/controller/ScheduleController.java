@@ -25,12 +25,8 @@ public class ScheduleController {
     @PostMapping("/tasks")
     public ResponseEntity<Void> createTask(
             @RequestBody TaskCreateReq taskCreateReq,
-            HttpSession session){
-        final Long userId = (Long) session.getAttribute(LOGIN_SESSION_KEY);
-        if(userId == null){
-            throw new RuntimeException("bad request. no session");
-        }
-        taskService.create(taskCreateReq, AuthUser.of(userId)); //userId 있을 때 넘기기
+            AuthUser authUser){
+        taskService.create(taskCreateReq, authUser); //userId 있을 때 넘기기 -> AuthUser 쓰고 날렸음
         return ResponseEntity.ok().build();
     }
 }
