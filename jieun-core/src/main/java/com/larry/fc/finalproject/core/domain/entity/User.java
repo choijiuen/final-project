@@ -1,6 +1,7 @@
 package com.larry.fc.finalproject.core.domain.entity;
 
 import com.larry.fc.finalproject.core.util.Encryptor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -19,6 +20,7 @@ public class User extends BaseEntity{
     private String password;
     private LocalDate birthday;
 
+    @Builder
     public User(String name, String email, String password, LocalDate birthday) {
         this.name = name;
         this.email = email;
