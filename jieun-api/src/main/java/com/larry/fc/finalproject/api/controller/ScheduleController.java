@@ -3,8 +3,10 @@ package com.larry.fc.finalproject.api.controller;
 
 import com.larry.fc.finalproject.api.dto.AuthUser;
 import com.larry.fc.finalproject.api.dto.EventCreateReq;
+import com.larry.fc.finalproject.api.dto.NotificationCreateReq;
 import com.larry.fc.finalproject.api.dto.TaskCreateReq;
 import com.larry.fc.finalproject.api.service.EventService;
+import com.larry.fc.finalproject.api.service.NotificationService;
 import com.larry.fc.finalproject.api.service.TaskService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +27,8 @@ public class ScheduleController {
     private final TaskService taskService;
     private final EventService eventService;
 
+    private final NotificationService notificationService;
+
     @PostMapping("/tasks")
     public ResponseEntity<Void> createTask(
             @RequestBody TaskCreateReq taskCreateReq,
@@ -38,6 +42,14 @@ public class ScheduleController {
             @RequestBody EventCreateReq eventCreateReq,
             AuthUser authUser){
         eventService.create(eventCreateReq, authUser); //userId 있을 때 넘기기 -> AuthUser 쓰고 날렸음
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/notifications")
+    public ResponseEntity<Void> createNotification(
+            @RequestBody NotificationCreateReq notificationCreateReq,
+            AuthUser authUser){
+        notificationService.create(notificationCreateReq, authUser); //userId 있을 때 넘기기 -> AuthUser 쓰고 날렸음
         return ResponseEntity.ok().build();
     }
 }
