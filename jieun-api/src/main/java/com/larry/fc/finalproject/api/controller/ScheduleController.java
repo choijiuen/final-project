@@ -1,21 +1,20 @@
 package com.larry.fc.finalproject.api.controller;
 
 
-import com.larry.fc.finalproject.api.dto.AuthUser;
-import com.larry.fc.finalproject.api.dto.EventCreateReq;
-import com.larry.fc.finalproject.api.dto.NotificationCreateReq;
-import com.larry.fc.finalproject.api.dto.TaskCreateReq;
+import com.larry.fc.finalproject.api.dto.*;
 import com.larry.fc.finalproject.api.service.EventService;
 import com.larry.fc.finalproject.api.service.NotificationService;
+import com.larry.fc.finalproject.api.service.ScheduleQueryService;
 import com.larry.fc.finalproject.api.service.TaskService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+
+import java.time.LocalDate;
+import java.util.List;
 
 import static com.larry.fc.finalproject.api.service.LoginService.LOGIN_SESSION_KEY;
 
@@ -24,6 +23,8 @@ import static com.larry.fc.finalproject.api.service.LoginService.LOGIN_SESSION_K
 @RestController
 public class ScheduleController {
 
+    private final ScheduleQueryService scheduleQueryService;
+    //세가지 기능에 관련된 도메인에 대해서 조회만을 담당하는 서비스,
     private final TaskService taskService;
     private final EventService eventService;
 
@@ -51,5 +52,13 @@ public class ScheduleController {
             AuthUser authUser){
         notificationService.create(notificationCreateReq, authUser); //userId 있을 때 넘기기 -> AuthUser 쓰고 날렸음
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/day")
+    public List<ScheduleDto> getScheduleByDay(
+            AuthUser authUser,
+            @RequestParam(required = false)
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date){
+        return scheduleQueryService.getScheduleByDay(authUser, date == null ? LocalDate.now() : date); //date 값이 null이면 현재를 보여주고 아니면 date 값 넣기
     }
 }

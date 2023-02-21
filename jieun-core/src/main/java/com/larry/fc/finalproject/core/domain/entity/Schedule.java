@@ -4,9 +4,11 @@ import com.larry.fc.finalproject.core.domain.Event;
 import com.larry.fc.finalproject.core.domain.Notification;
 import com.larry.fc.finalproject.core.domain.ScheduleType;
 import com.larry.fc.finalproject.core.domain.Task;
+import com.larry.fc.finalproject.core.util.Period;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 
@@ -72,5 +74,9 @@ public class Schedule extends BaseEntity{
 
     public Notification toNotification(){
         return new Notification(this);
+    }
+
+    public boolean isOverlapped(LocalDate date) {
+        return Period.of(getStartAt(), getEndAt()).isOverlapped(date);
     }
 }
