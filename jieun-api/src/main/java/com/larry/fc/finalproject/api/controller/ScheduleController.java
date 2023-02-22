@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.List;
 
 import static com.larry.fc.finalproject.api.service.LoginService.LOGIN_SESSION_KEY;
@@ -60,5 +61,21 @@ public class ScheduleController {
             @RequestParam(required = false)
             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date){
         return scheduleQueryService.getScheduleByDay(authUser, date == null ? LocalDate.now() : date); //date 값이 null이면 현재를 보여주고 아니면 date 값 넣기
+    }
+
+    @GetMapping("/week")
+    public List<ScheduleDto> getScheduleByWeek(
+            AuthUser authUser,
+            @RequestParam(required = false)
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startOfWeek){
+        return scheduleQueryService.getScheduleByWeek(authUser, startOfWeek == null ? LocalDate.now() : startOfWeek); //date 값이 null이면 현재를 보여주고 아니면 date 값 넣기
+    }
+
+    @GetMapping("/month")
+    public List<ScheduleDto> getScheduleByMonth(
+            AuthUser authUser,
+            @RequestParam(required = false)
+            @DateTimeFormat(pattern = "yyyy-MM") String yearMonth){ //2023-02
+        return scheduleQueryService.getScheduleByMonth(authUser, yearMonth == null ? YearMonth.now() : YearMonth.parse(yearMonth)); //date 값이 null이면 현재를 보여주고 아니면 date 값 넣기
     }
 }
