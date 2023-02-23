@@ -31,7 +31,7 @@
         <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
             <div class="card border-0 shadow rounded-3 my-5">
                 <div class="card-body p-4 p-sm-5" id="signIn-form" style="display: none">
-                    <h5 class="card-title text-center mb-5 fw-light fs-4">Sign In</h5>
+                    <h5 class="card-title text-center mb-5 fw-light fs-4">Sign In 로그인 해주세요</h5>
                     <form>
                         <div class="form-floating mb-3">
                             <input type="email" class="form-control" id="signIn-email"
@@ -93,6 +93,10 @@
     </div>
 </div>
 
+
+
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
         integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -129,8 +133,7 @@
             console.log(res)
             location.reload();
         }).catch((e) => {
-            alert(JSON.stringify(e.response))
-            <!--            alert(e.response.data.errorMessage)-->
+            alert(e.response.data.errorMessage)
         })
     })
 
@@ -144,8 +147,7 @@
             location.reload();
         }).catch((e) => {
             console.log(e)
-            alert(JSON.stringify(e.response))
-            <!--            alert(e.response.data.errorMessage)-->
+            alert(e.response.data.errorMessage)
         })
     })
 

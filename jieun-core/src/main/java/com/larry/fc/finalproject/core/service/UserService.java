@@ -3,6 +3,8 @@ package com.larry.fc.finalproject.core.service;
 import com.larry.fc.finalproject.core.domain.entity.User;
 import com.larry.fc.finalproject.core.domain.entity.repository.UserRepository;
 import com.larry.fc.finalproject.core.dto.UserCreateReq;
+import com.larry.fc.finalproject.core.exception.CalendarException;
+import com.larry.fc.finalproject.core.exception.ErrorCode;
 import com.larry.fc.finalproject.core.util.Encryptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,7 +24,7 @@ public class UserService {
     public User create(UserCreateReq userCreateReq) {
         userRepository.findByEmail(userCreateReq.getEmail())
                 .ifPresent(u-> {
-                    throw new RuntimeException("user already existed!");
+                    throw new CalendarException(ErrorCode.USER_NOT_FOUND);
                 });
 
         return userRepository.save(new User( //유저 없는거 확인하고 새로 생성해서 저장
@@ -45,6 +47,6 @@ public class UserService {
     @Transactional
     public User findByUserId(Long userId){
         return userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("no user by id"));
+                .orElseThrow(() -> new CalendarException(ErrorCode.USER_NOT_FOUND));
     }
 }

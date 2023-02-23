@@ -8,6 +8,8 @@ import com.larry.fc.finalproject.core.domain.entity.Schedule;
 import com.larry.fc.finalproject.core.domain.entity.User;
 import com.larry.fc.finalproject.core.domain.entity.repository.EngagementRepository;
 import com.larry.fc.finalproject.core.domain.entity.repository.ScheduleRepository;
+import com.larry.fc.finalproject.core.exception.CalendarException;
+import com.larry.fc.finalproject.core.exception.ErrorCode;
 import com.larry.fc.finalproject.core.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -38,7 +40,7 @@ public class EventService {
                 eventCreateReq.getEndAt()))
 
         ){ //engagement 중에 아무거나 하나 걸리면 , 기간이랑 겹치는지, 약속 상태가 수락인지 등
-            throw new RuntimeException("cannot make engagement. period overlapped!");
+            throw new CalendarException(ErrorCode.EVENT_CREATE_OVERLAPPED_PERIOD);
         }
         final Schedule eventSchedule = Schedule.event( //걸리는게
                 eventCreateReq.getTitle(),
