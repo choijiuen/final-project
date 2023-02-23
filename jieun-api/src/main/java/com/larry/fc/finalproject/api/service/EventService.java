@@ -1,6 +1,7 @@
 package com.larry.fc.finalproject.api.service;
 
 import com.larry.fc.finalproject.api.dto.AuthUser;
+import com.larry.fc.finalproject.api.dto.EngagementEmailStuff;
 import com.larry.fc.finalproject.api.dto.EventCreateReq;
 import com.larry.fc.finalproject.core.domain.RequestStatus;
 import com.larry.fc.finalproject.core.domain.entity.Engagement;
@@ -13,9 +14,9 @@ import com.larry.fc.finalproject.core.exception.ErrorCode;
 import com.larry.fc.finalproject.core.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -51,16 +52,26 @@ public class EventService {
         );
         scheduleRepository.save(eventSchedule); //eventSchedule 생성하고 db 저장
 
-        eventCreateReq.getAttendeeIds()
-                .forEach(atId -> {
-                    final User attendee = userService.findByUserId(atId);
+        final List<User> attendees =
+                eventCreateReq.getAttendeeIds().stream()
+                        .map(aId -> userService.findByUserId(aId))
+                        .collect(Collectors.toList());
+
+        attendees.forEach(attendee -> {
                     final Engagement engagement = Engagement.builder()
                             .schedule(eventSchedule)
                             .requestStatus(RequestStatus.REQUESTED)
                             .attendee(attendee)
                             .build();
                     engagementRepository.save(engagement); //engagement 생성하고 db 저장
-                    emailService.sendEngagement(engagement);
-                });
+                    emailService.sendEngagement(EngagementEmailStuff.builder()
+                            .title(engagement.getEvent().getTitle())
+                            .toEmail(engagement.getAttendee().getEmail())
+                            .attendeEmails(attendees.stream()
+                                    .map(a -> a.getEmail())
+                                    .collect(Collectors.toList())) //engagement에서는 참석자 목록 모르니깐 위에서 어텐디 목록 뽑음
+                            .period(engagement.getEvent().getPeriod())
+                            .build());
+        });
     }
 }
