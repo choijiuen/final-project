@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -41,7 +42,7 @@ public class ScheduleController {
 
     @PostMapping("/events")
     public ResponseEntity<Void> createEvent(
-            @RequestBody EventCreateReq eventCreateReq,
+            @Valid @RequestBody EventCreateReq eventCreateReq, //@Valid 달면 eventCreateReq 에 달아놨던 어노테이션 동작 하는 거다
             AuthUser authUser){
         eventService.create(eventCreateReq, authUser); //userId 있을 때 넘기기 -> AuthUser 쓰고 날렸음
         return ResponseEntity.ok().build();
