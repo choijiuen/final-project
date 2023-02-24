@@ -68,7 +68,7 @@ public class EventService {
                                     .engagementId(engagement.getId())
                             .title(engagement.getEvent().getTitle())
                             .toEmail(engagement.getAttendee().getEmail())
-                            .attendeEmails(attendees.stream()
+                            .attendeeEmails(attendees.stream()
                                     .map(a -> a.getEmail())
                                     .collect(Collectors.toList())) //engagement에서는 참석자 목록 모르니깐 위에서 어텐디 목록 뽑음
                             .period(engagement.getEvent().getPeriod())
