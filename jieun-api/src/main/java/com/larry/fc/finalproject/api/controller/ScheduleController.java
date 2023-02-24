@@ -78,7 +78,7 @@ public class ScheduleController {
         return scheduleQueryService.getScheduleByMonth(authUser, yearMonth == null ? YearMonth.now() : YearMonth.parse(yearMonth)); //date 값이 null이면 현재를 보여주고 아니면 date 값 넣기
     }
 
-    @PutMapping("/events/engagement/{engagmentId}")
+    @PutMapping("/events/engagements/{engagementId}")
     public RequestStatus updateEngagement(
             @Valid @RequestBody ReplyEngagementReq replyEngagementReq,
             @PathVariable Long engagementId,

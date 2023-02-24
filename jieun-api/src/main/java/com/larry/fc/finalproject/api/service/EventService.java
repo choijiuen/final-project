@@ -65,6 +65,7 @@ public class EventService {
                             .build();
                     engagementRepository.save(engagement); //engagement 생성하고 db 저장
                     emailService.sendEngagement(EngagementEmailStuff.builder()
+                                    .engagementId(engagement.getId())
                             .title(engagement.getEvent().getTitle())
                             .toEmail(engagement.getAttendee().getEmail())
                             .attendeEmails(attendees.stream()

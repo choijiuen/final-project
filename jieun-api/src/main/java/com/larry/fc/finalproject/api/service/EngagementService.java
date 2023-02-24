@@ -23,13 +23,12 @@ public class EngagementService {
         //참석자가 auth user와 같은지 비교
         // requested 상태인지 체크 --> 요청 했을 때만 수락 , 거절 가능하니깐
         //update
-        engagementRepository.findById(engagementId)
+        return engagementRepository.findById(engagementId)
                 .filter(e -> e.getRequestStatus() == RequestStatus.REQUESTED)
                 .filter(e -> e.getAttendee().getId().equals(authUser.getId()))
                 .map(e -> e.reply(type))
                 .orElseThrow(() -> new CalendarException(ErrorCode.BAD_REQUEST)) //값이 empty 일 때
                 .getRequestStatus();
 
-        return null;
     }
 }
