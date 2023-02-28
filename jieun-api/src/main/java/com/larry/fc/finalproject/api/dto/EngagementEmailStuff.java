@@ -11,7 +11,7 @@ import java.util.function.Predicate;
 
 
 public class EngagementEmailStuff {
-    private static final String engagementUpdateApi = "http://localhost:8080/events/engagements/";
+    private static final String engagementUpdateApi = "http://jieun-jenny.site/events/engagements/";
     public static final String MAIL_TIME_FORMAT = "yyyy년 MM월 dd일(E) a hh시 mm분";
     public static final List<Pair<String, Predicate<Period>>> endAtFormatParts = Arrays.asList(
             Pair.of("yyyy년 ", period -> period.getEndAt().getYear() == period.getStartAt().getYear()),
