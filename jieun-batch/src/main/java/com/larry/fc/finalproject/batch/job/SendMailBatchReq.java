@@ -14,5 +14,4 @@ public class SendMailBatchReq {
     private LocalDateTime startAt;
     private String title;
     private String userMail;
-
 }

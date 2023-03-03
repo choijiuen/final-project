@@ -16,6 +16,7 @@ import org.springframework.batch.item.database.builder.JdbcCursorItemReaderBuild
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.web.client.RestTemplate;
 
 import javax.sql.DataSource;
 import java.util.stream.Collectors;
@@ -71,7 +72,7 @@ public class SendEmailAlarmJobConfiguration {
         return new JdbcCursorItemReaderBuilder<SendMailBatchReq>()
                 .dataSource(dataSource)
                 .rowMapper(new BeanPropertyRowMapper<>(SendMailBatchReq.class))
-                .sql("select s.id, s.start_at, s.title, u.email as user_email\n" +
+                .sql("select s.id, s.start_at, s.title, u.email as user_mail\n" +
                         "from schedules s\n" +
                         "        inner join users u on s.writer_id = u.id\n" +
                         "where s.start_at >= now() + interval 10 minute\n" +
@@ -85,7 +86,7 @@ public class SendEmailAlarmJobConfiguration {
         return new JdbcCursorItemReaderBuilder<SendMailBatchReq>()
                 .dataSource(dataSource)
                 .rowMapper(new BeanPropertyRowMapper<>(SendMailBatchReq.class))
-                .sql("select s.id, s.start_at, s.title, u.email as user_email\n" +
+                .sql("select s.id, s.start_at, s.title, u.email as user_mail\n" +
                         "from engagements e\n" +
                         "         inner join schedules s on e.schedule_id = s.id\n" +
                         "         inner join users u on s.writer_id = u.id\n" +
@@ -97,10 +98,12 @@ public class SendEmailAlarmJobConfiguration {
     }
 
     @Bean
-    public ItemWriter<SendMailBatchReq> sendEmailAlarmWriter(){
-        return list -> log.info("write items.\n" +
-                list.stream()
-                        .map(s -> s.toString())
-                        .collect(Collectors.joining("\n")));
+    public ItemWriter<SendMailBatchReq> sendEmailAlarmWriter(){ //SendMailBatchReq의 list를 가지고 이메일을 쏴달라
+        return list -> {
+            list.forEach(l -> System.out.println(l.toString()));
+            new RestTemplate().postForObject(
+                    "http://localhost:8080/api/batch/mail", list, Object.class
+            );
+        };
     }
 }

@@ -1,5 +1,6 @@
 package com.larry.fc.finalproject.api.service;
 
+import com.larry.fc.finalproject.api.controller.BatchController;
 import com.larry.fc.finalproject.api.dto.EngagementEmailStuff;
 import com.larry.fc.finalproject.core.domain.entity.Engagement;
 import lombok.RequiredArgsConstructor;
@@ -32,5 +33,10 @@ public class RealEmailService implements EmailService{
             );
         };
         emailSender.send(preparator);
+    }
+
+    @Override
+    public void sendAlarmMail(BatchController.SendMailBatchReq req) {
+        System.out.println("send alarm. "+ req.toString());
     }
 }
