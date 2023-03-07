@@ -124,3 +124,51 @@ button:hover {
     letter-spacing: 1px;
     margin:0 0 10px 0;
 }
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+li {
+    list-style: none;
+}
+
+.tab_menu {
+    width: 800px;
+    margin: 200px auto;
+}
+
+.tab {
+    display: flex;
+    gap: 30px;
+}
+
+.tab_item {
+    border: 1px solid green;
+    padding: 10px 20px;
+    border-radius: 20px;
+}
+
+.tab_inner_wrap {
+    margin-top: 20px;
+    background: green;
+    border-radius: 20px;
+}
+
+.tab_inner {
+    padding: 20px;
+    color: #fff;
+    font-size: 24px;
+    display: none;
+}
+
+.tab_item.active {
+    background: green;
+    color: #fff;
+}
+
+.tab_inner.active {
+    display: block;
+}

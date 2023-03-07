@@ -11,79 +11,82 @@
 
 <body>
 
-<div id="slide">
-    <div class="slider-container">
-            <span class="leftBtn">
-                <i class="fa-solid fa-chevron-left"></i>
-            </span>
-        <div class="slider">
-                <span class="first-img">
-                    <div class="text-wrap">
-                    </div>
-                    <img src="https://cdn.pixabay.com/photo/2021/08/22/06/24/bird-6564285__340.jpg" alt="0" />
+    <div id="slide">
+        <div class="slider-container">
+                <span class="leftBtn">
+                    <i class="fa-solid fa-chevron-left"></i>
                 </span>
-            <span>
-                    <div class="text-wrap">
-                    </div>
-                    <img src="https://cdn.pixabay.com/photo/2022/03/30/17/54/seagull-7101611__340.jpg" alt="1" />
-                </span>
-            <span>
-                    <div class="text-wrap">
-                    </div>
-                    <img src="https://cdn.pixabay.com/photo/2022/05/29/05/36/otter-7228458__340.jpg" alt="2" />
-                </span>
-            <span>
-                    <div class="text-wrap">
-                    </div>
-                    <img src="https://cdn.pixabay.com/photo/2022/06/02/06/43/flowers-7237133__340.jpg" alt="3" />
-                </span>
-            <span class="last-img">
-                    <div class="text-wrap">
-                    </div>
-                    <img src="https://cdn.pixabay.com/photo/2022/03/30/17/54/seagull-7101611__340.jpg" alt="4" />
-                </span>
+            <div class="slider">
+                    <span class="first-img">
+                        <div class="text-wrap">
+                        </div>
+                        <img src="https://cdn.pixabay.com/photo/2021/08/22/06/24/bird-6564285__340.jpg" alt="0" />
+                    </span>
+                <span>
+                        <div class="text-wrap">
+                        </div>
+                        <img src="https://cdn.pixabay.com/photo/2022/03/30/17/54/seagull-7101611__340.jpg" alt="1" />
+                    </span>
+                <span>
+                        <div class="text-wrap">
+                        </div>
+                        <img src="https://cdn.pixabay.com/photo/2022/05/29/05/36/otter-7228458__340.jpg" alt="2" />
+                    </span>
+                <span>
+                        <div class="text-wrap">
+                        </div>
+                        <img src="https://cdn.pixabay.com/photo/2022/06/02/06/43/flowers-7237133__340.jpg" alt="3" />
+                    </span>
+                <span class="last-img">
+                        <div class="text-wrap">
+                        </div>
+                        <img src="https://cdn.pixabay.com/photo/2022/03/30/17/54/seagull-7101611__340.jpg" alt="4" />
+                    </span>
+            </div>
+                 <div class="page-btns">
+                    <span class="rightBtn">
+                            <i class="fa-solid fa-chevron-right"></i>
+                    </span>
+
+                     <div class="page-no">
+                         <span class="current-slide-no"></span>
+                         <span class="slash">/333</span>
+                         <span class="total-slide-no"></span>
+                     </div>
+                <div>
         </div>
-             <div class="page-btns">
-                <span class="rightBtn">
-                        <i class="fa-solid fa-chevron-right"></i>
-                </span>
-
-                 <div class="page-no">
-                     <span class="current-slide-no"></span>
-                     <span class="slash">/</span>
-                     <span class="total-slide-no"></span>
-                 </div>
-            <div>
-    </div>
-</div>
-
-<!--아래는 좌우 화살표 모양을 위한 이모지사이트 링크-->
-<script src="https://kit.fontawesome.com/d505e57471.js" crossorigin="anonymous"></script>
-
-
-<div class="buttons">
-    <div class="forCustomer">
-        <button class="inform">정보</button>
-
-        남은 시간
-        <h2 id="remain-time"></h2>
-
-        <button class="menu">메뉴</button>
-
-        <button class="inquiry">상품문의</button>
-        <form>
-            <input type="text" placeholder="본 상품과 관련이 없는 글은 예고없이 삭제될 수 있습니다."/>
-            <button>상품 문의 등록하기</button>
-        </form>
-        <ul></ul>
-
-
     </div>
 
-    <div class="open">
-        <button class="basket">장바구니 담기</button>
-        <button class="purchase">구매하기</button>
-    </div>
+    <!--아래는 좌우 화살표 모양을 위한 이모지사이트 링크-->
+    <script src="https://kit.fontawesome.com/d505e57471.js" crossorigin="anonymous"></script>
+
+            <div class="full">
+        <div class="tab_menu">
+            <ul class="tab">
+                <li class="tab_item active">정보</li>
+                <li class="tab_item">메뉴</li>
+                <li class="tab_item">상품문의</li>
+            </ul>
+            <div class="tab_inner_wrap">
+                <div class="tab_inner active">남은 시간
+                    <h2 id="remain-time"></h2></div>
+                <div class="tab_inner">메뉴 컨텐츠 영역</div>
+                <div class="tab_inner">
+                    <form>
+                        <input type="text" id="msg" placeholder="본 상품과 관련이 없는 글은 예고없이 삭제될 수 있습니다."/>
+                        <button>상품 문의 등록하기</button>
+                    </form>
+                        <h5 id="txt">텍스트 출력되는 영역</h5>
+                </div>
+            </div>
+        </div>
+
+            <ul></ul>
+
+        <div class="open">
+            <button class="basket">장바구니 담기</button>
+            <button class="purchase">구매하기</button>
+        </div>
 
 </div>
 

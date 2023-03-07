@@ -5,7 +5,8 @@ const closeButton = document.querySelector('.close');
 const inquiryButton = document.querySelector('inquiry');
 const form = document.querySelector('form');
 const input = document.querySelector('input');
-const ul = document.querySelector('ul');
+const txt = document.getElementById('txt');
+
 const remainTime = document.querySelector("#remain-time");
 
 const images = document.querySelectorAll('.slider span');
@@ -13,21 +14,51 @@ const sliderContainer = document.querySelector('slider-container');
 const slider = document.querySelector('.slider');
 const prevBtn = document.querySelector('.leftBtn');
 const nextBtn = document.querySelector('.rightBtn');
+const tabItem = document.querySelectorAll('.tab_item')
+const tabInner = document.querySelectorAll('.tab_inner')
 
-function pageNumber__Init(){
-    // 전채 배너 페이지 갯수 세팅해서 .slider 에 'data-slide-total' 넣기
-    const totalSlideNo = $('.slide > .slider-container > .slides > .bn').length;
-    //console.log(totalSlideNo);
+tabItem.forEach((tab, idx)=> {
+    tab.addEventListener('click', function(){
+        tabInner.forEach((inner)=> {
+            inner.classList.remove('active')
+        })
 
-    $('.main-bn > .slider').attr('data-slide-total', totalSlideNo);
+        tabItem.forEach((item)=> {
+            item.classList.remove('active')
+        })
 
-    // 각 배너 페이지 번호 매기기
-    $('.main-bn > .slider > .slides > .bn').each(function(index, node){
-        $(node).attr('data-slide-no', index + 1);
-    });
-};
+        tabItem[idx].classList.add('active')
+        tabInner[idx].classList.add('active')
+    })
+})
 
-pageNumber__Init();
+// function pageNumber__Init(){
+//     // 전채 배너 페이지 갯수 세팅해서 .slider 에 'data-slide-total' 넣기
+//     const totalSlideNo = document.querySelectorAll('.text-wrap');
+//     // console.log(totalSlideNo.length);
+//
+//     // $('.main-bn > .slider').attr('data-slide-total', totalSlideNo);
+//     slider.setAttribute('data-slide-total', totalSlideNo.length);
+//
+//     const
+//     // 각 배너 페이지 번호 매기기
+//     $('.main-bn > .slider > .slides > .bn').each(function(index, node){
+//         $(node).attr('data-slide-no', index + 1);
+//     });
+// };
+//
+// pageNumber__Init();
+//
+// // 슬라이더 이동시 페이지 번호 변경
+// function updateCurrentPageNumber(){
+//     var totalSlideNo = $('.main-bn > .slider').attr('data-slide-total');
+//     var currentSlideNo = $('.main-bn > .slider > .slides > .bn.active').attr('data-slide-no');
+//
+//     $('.main-bn > .slider > .page-btns > .page-no > .total-slide-no').html(totalSlideNo);
+//     $('.main-bn > .slider > .page-btns > .page-no > .current-slide-no').html(currentSlideNo);
+// };
+//
+// updateCurrentPageNumber()
 
 
 let current = 1;
@@ -81,13 +112,11 @@ setInterval(diffDay, 1000);
 
 form.addEventListener('submit', (event) =>{
     event.preventDefault();
+    const msg = input.value;
 
-    if(input.value !== ''){
-        const li = document.createElement('li');
-        li.innerText = input.value;
-        ul.appendChild(li);
-
-        input.value = '';
+    if(msg){
+        txt.textContent = msg;
+        form.reset();
     }
 });
 
