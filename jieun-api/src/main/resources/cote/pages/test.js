@@ -6,9 +6,7 @@ const inquiryButton = document.querySelector('inquiry');
 const form = document.querySelector('form');
 const input = document.querySelector('input');
 const txt = document.getElementById('txt');
-
 const remainTime = document.querySelector("#remain-time");
-
 const images = document.querySelectorAll('.slider span');
 const sliderContainer = document.querySelector('slider-container');
 const slider = document.querySelector('.slider');
@@ -16,6 +14,28 @@ const prevBtn = document.querySelector('.leftBtn');
 const nextBtn = document.querySelector('.rightBtn');
 const tabItem = document.querySelectorAll('.tab_item')
 const tabInner = document.querySelectorAll('.tab_inner')
+
+// 슬라이더 페이지 번호 지정
+function pageNumber__Init(){
+    // 전채 배너 페이지 갯수 세팅해서 .slider 에 'data-slide-total' 넣기
+    // var totalSlideNo = $('.main-bn > .slider > .slides > .bn').length;
+    const totalSlideNo = document.querySelectorAll('.text-wrap');
+
+    // $('.main-bn > .slider').attr('data-slide-total', totalSlideNo);
+    slider.setAttribute('data-slide-total', totalSlideNo.length);
+
+    // // 각 배너 페이지 번호 매기기
+    // $('.main-bn > .slider > .slides > .bn').each(function(index, node){
+    //     $(node).attr('data-slide-no', index + 1);
+    // });
+    totalSlideNo.forEach(function (index,node){
+       index.setAttribute('data-slide-no', node);
+    });
+
+};
+
+pageNumber__Init();
+
 
 tabItem.forEach((tab, idx)=> {
     tab.addEventListener('click', function(){
@@ -31,34 +51,6 @@ tabItem.forEach((tab, idx)=> {
         tabInner[idx].classList.add('active')
     })
 })
-
-// function pageNumber__Init(){
-//     // 전채 배너 페이지 갯수 세팅해서 .slider 에 'data-slide-total' 넣기
-//     const totalSlideNo = document.querySelectorAll('.text-wrap');
-//     // console.log(totalSlideNo.length);
-//
-//     // $('.main-bn > .slider').attr('data-slide-total', totalSlideNo);
-//     slider.setAttribute('data-slide-total', totalSlideNo.length);
-//
-//     const
-//     // 각 배너 페이지 번호 매기기
-//     $('.main-bn > .slider > .slides > .bn').each(function(index, node){
-//         $(node).attr('data-slide-no', index + 1);
-//     });
-// };
-//
-// pageNumber__Init();
-//
-// // 슬라이더 이동시 페이지 번호 변경
-// function updateCurrentPageNumber(){
-//     var totalSlideNo = $('.main-bn > .slider').attr('data-slide-total');
-//     var currentSlideNo = $('.main-bn > .slider > .slides > .bn.active').attr('data-slide-no');
-//
-//     $('.main-bn > .slider > .page-btns > .page-no > .total-slide-no').html(totalSlideNo);
-//     $('.main-bn > .slider > .page-btns > .page-no > .current-slide-no').html(currentSlideNo);
-// };
-//
-// updateCurrentPageNumber()
 
 
 let current = 1;
